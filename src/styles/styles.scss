@@ -1,1 +1,15 @@
 @import 'bootstrap/scss/bootstrap.scss';
+@import '~@ctrl/ngx-emoji-mart/picker';
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}

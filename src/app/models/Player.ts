@@ -1,30 +1,23 @@
+import { PlayerAnimations } from './engine/graphics/SpriteMap';
+import * as PIXI from 'pixi.js';
+
 export interface Player {
     id: string;
     name: string;
-    isOnline: boolean;
+    x: number;
+    y: number;
+    directionX: number;
+    directionY: number;
+    sprite: PIXI.AnimatedSprite;
     isCurrent: boolean;
-    directionX: number;
-    directionY: number;
-    positionX: number;
-    positionY: number;
+    textures: PlayerAnimations;
+    textureIndex: number;
 }
 
-export interface PlayerDTO {
+export interface PlayerDto {
     id: string;
-    name: string;
-    isOnline: boolean;
-    directionX: number;
-    directionY: number;
     positionX: number;
     positionY: number;
-}
-
-export function GetPlayerDTO(player: Player): PlayerDTO {
-    const dto: PlayerDTO = {
-        ...player
-    };
-
-    delete player.isCurrent;
-
-    return dto;
+    textureIndex: number;
+    name: string;
 }

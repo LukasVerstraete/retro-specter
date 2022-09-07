@@ -1,10 +1,39 @@
 :host {
     display: block;
+    box-sizing: border-box;
     width: 100%;
     height: 100vh;
-
+    
     .retro-canvas-container {
         width: 100%;
         height: 100%;
+        overflow: hidden;
+
+
+        #ui-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+            .retro-btn {
+                position: absolute;
+                right: 4rem;
+                top: 4rem;
+                font-size: 5rem;
+                color: #fdfd86;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.5);
+                    color: darken(#fdfd86, 20%);
+                }
+            }
+        }
     }
 }

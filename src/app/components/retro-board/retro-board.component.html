@@ -1,0 +1,84 @@
+<div cdkDropListGroup *ngIf="($retroColumns | async) as retroColumns" id="retro-container">
+    <fa-icon class="close-btn" (click)="CloseRetroBoard()" [icon]="closeIcon"></fa-icon>
+    <div class="d-flex column-container">
+        <div 
+            cdkDropList
+            cdkDrop
+            [cdkDropListData]="column"
+            (cdkDropListDropped)="NoteDropped($event)"
+            [id]="column.id" 
+            class="retro-column w-100 h-100" 
+            *ngFor="let column of retroColumns"
+        >
+            <b class="column-title">{{column.title}}</b>
+            <div class="d-flex flex-wrap">
+                <retro-post-it cdkDrag [cdkDragData]="note" class="player-note" *ngFor="let note of column.notes">
+                    <div postItHeader class="d-flex justify-content-between align-items-center h-100 p-2">
+                        <span style="font-style: italic; font-size: 1.2rem;">{{note.by}}</span>
+                        <fa-icon cdkDragHandle class="drag-handle" [icon]="dragIcon"></fa-icon>
+                    </div>
+                    <div postItContent class="p-2 content">
+                        {{note.text}}
+                    </div>
+                </retro-post-it>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex post-it-container" *ngIf="($playerNotes | async) as playerNotes">
+        <retro-post-it class="add-note-post-it player-note">
+            <div postItHeader class="emoji-container d-flex justify-content-end p-2">
+                <button class="emoji-btn" (click)="showEmojiPicker = !showEmojiPicker">
+                    <fa-icon [icon]="emojiIcon"></fa-icon>
+                </button>
+                <emoji-mart 
+                    *ngIf="showEmojiPicker"
+                    class="emoji-picker" 
+                    (emojiClick)="EmojiSelected($event)"
+                    [showPreview]="false"
+                ></emoji-mart>
+            </div>
+            <div postItContent class="h-100 d-flex flex-column">
+                <textarea 
+                    #newNote 
+                    class="post-it-text-area flex-grow-1 p-2" 
+                    rows="4" 
+                    name="note-text" 
+                    [(ngModel)]="newNoteText" 
+                    placeholder="Type you card here..."
+                ></textarea>
+                <div class="px-2 pb-2">
+                    <button class="btn btn-primary btn-block" (click)="AddPlayerNote()">Add</button>
+                </div>
+            </div>
+        </retro-post-it>
+        <div cdkDropList class="player-notes d-flex" [id]="playerNoteContainerId">
+            <retro-post-it class="player-note" cdkDrag [cdkDragData]="note" *ngFor="let note of playerNotes">
+                <div postItHeader class="d-flex justify-content-end align-items-center h-100 p-2">
+                    <fa-icon cdkDragHandle class="drag-handle" [icon]="dragIcon"></fa-icon>
+                </div>
+                <div postItContent class="p-2 content">
+                    {{note.text}}
+                </div>
+            </retro-post-it>
+        </div>
+    </div>
+</div>
+
+<div id="action-points" [ngClass]="{'active': showActionPoints}" *ngIf="($retro | async) as retro">
+    <span>
+        <fa-icon [icon]="chevronIcon" (click)="showActionPoints = !showActionPoints"></fa-icon>
+    </span>
+    <div class="w-100">
+        <h1>Action points</h1>
+        <ul>
+            <li class="d-flex justify-content-between align-items-center" *ngFor="let actionPoint of retro.actionPoints; let i = index">
+                <span>{{actionPoint}}</span>
+                <fa-icon [icon]="closeIcon" class="remove-button" (click)="removeActionPoint(retro, i)"></fa-icon>
+            </li>
+        </ul>
+        <div class="d-flex align-items-center">
+            <input [(ngModel)]="newActionPoint" type="text" class="add-action-point-input"/>
+            <button (click)="addActionPoint(retro)"><fa-icon [icon]="addIcon"></fa-icon></button>
+        </div>
+    </div>
+</div>

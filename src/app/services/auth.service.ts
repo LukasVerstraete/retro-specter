@@ -1,9 +1,9 @@
-import { Player } from './../models/Player';
+import { Player, PlayerDto } from './../models/Player';
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { User } from 'firebase';
 
@@ -17,12 +17,12 @@ export class AuthService {
     private fireStore: AngularFirestore
   ) { }
 
-  public GetActivePlayer(): Observable<Player> {
+  public GetActivePlayer(): Observable<PlayerDto> {
     return this.afAuth.authState.pipe(
       switchMap((fireUser: User) => {
         if (fireUser) {
           const userId: string = fireUser.uid;
-          return this.fireStore.doc<Player>(`players/${userId}`).valueChanges();
+          return this.fireStore.doc<PlayerDto>(`players/${userId}`).valueChanges();
         }
         return of(null);
       })
@@ -32,7 +32,7 @@ export class AuthService {
   public IsAuthenticated(): Observable<boolean> {
     return this.GetActivePlayer().pipe(
       take(1),
-      map((player: Player) => {
+      map((player: PlayerDto) => {
         return player !== null;
       })
     );
@@ -40,14 +40,9 @@ export class AuthService {
 
   public async Login(email: string, password: string): Promise<void> {
     await this.afAuth.signInWithEmailAndPassword(email, password);
-    await this.GetActivePlayer().pipe(
-      tap((player: Player) => {
-        if (player) {
-          player.isOnline = true;
-          this.fireStore.doc<Player>(`players/${player.id}`).set(player);
-        }
-      }),
-      take(1)
-    ).toPromise();
+  }
+
+  public SetPlayerPosition(playerId: string, positionX: number, positionY: number): Observable<void> {
+    return from(this.fireStore.doc<PlayerDto>(`players/${playerId}`).update({positionX, positionY}));
   }
 }

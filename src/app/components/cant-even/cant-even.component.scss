@@ -1,0 +1,47 @@
+:host {
+    align-self: flex-end;
+    display: block;
+    width: 100%;
+    margin-bottom: 3rem;
+
+    #banner {
+        transform: rotate(10deg);
+        width: 120%;
+        margin-left: -10%;
+        background: repeating-linear-gradient(
+            146deg, 
+            #000000 0, 
+            #000000 4rem, 
+            #eefe45 4rem, 
+            #eefe45 8rem
+        );
+        padding: 6rem;
+        display: flex;
+        justify-content: center;
+
+        .banner-content {
+            font-size: 5rem;
+            background-color: #3b3b3b;
+            padding: 2rem;
+            max-width: 50%;
+            color: white;
+            
+            span {
+                display: flex;
+                width: 100%;
+                justify-content: space-around;
+
+                h1 {
+                    display: inline;
+                    text-align: center;
+                    margin: 0;
+                }
+    
+                .alert-icon {
+                    font-size: 3rem;
+                    color: #eefe45;
+                }
+            }
+        }
+    }
+}

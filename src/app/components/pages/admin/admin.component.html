@@ -1,0 +1,57 @@
+
+<h1>Admin panel</h1>
+<div>
+    <form [formGroup]="retroForm" (ngSubmit)="CreateRetro()">
+        <div class="form-group d-flex">
+            <input 
+                type="text"
+                class="form-control"
+                formControlName="name"
+            />
+            <button class="btn btn-primary btn-block">Add Retro</button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="($retros | async) as retros">
+    <div class="list-group">
+        <div *ngFor="let retro of retros; index as i" class="list-group-item">
+            <div class="d-flex align-items-center mb-2">
+                <div class="w-50 d-flex justify-content-between align-items-center px-3">
+                    <b>{{retro.name}}</b> <i>{{baseUrl}}/retro/{{retro.id}}</i>
+                </div>
+                <div class="form-group w-50 d-flex mb-0">
+                    <input 
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="columnNames[i]"
+                    />
+                    <button class="btn btn-primary btn-block" (click)="CreateColumn(retro.id, i, retro.columns.length)">
+                        Add Column
+                    </button>
+                    <button class="btn btn-danger ml-1" (click)="DeleteRetro(retro.id)">
+                        <fa-icon [icon]="trashIcon"></fa-icon>
+                    </button>
+                </div>
+            </div>
+            <div 
+                cdkDropList 
+                [cdkDropListData]="retro.columns"
+                (cdkDropListDropped)="dropColumn(retro.id, retro.columns, $event)"
+                class="list-group"
+            >
+                <div 
+                    cdkDrag 
+                    [cdkDragData]="column" 
+                    class="list-group-item p-1 pl-3 d-flex justify-content-between align-items-center" 
+                    *ngFor="let column of retro.columns"
+                >
+                    <span>{{column.title}}</span>
+                    <button class="btn btn-danger" (click)="DeleteColumn(retro.id, column.id)">
+                        <fa-icon [icon]="trashIcon"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

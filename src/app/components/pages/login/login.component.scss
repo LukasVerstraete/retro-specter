@@ -5,20 +5,33 @@
     justify-content: center;
     align-items: center;
 
-    .login-form {
-        padding: 0 1rem;
-    
-        .form-label {
-            font-size: 0.8em;
+    #login {
+        width: auto;
+
+        .header {
+            padding: 3rem;
         }
 
-        .login-btn {
-            font-size: 0.9em;
-        }
+        .login-content {
+            padding: 3rem 5rem;
+            .login-form {
+                font-size: 2rem;
+                text-align: left;
+                padding: 0 2rem 2rem 2rem;
+                
+                .form-label {
+                    margin-bottom: 0;
+                }
 
-        input {
-            font-family: sans-serif;
-            font-size: 0.5em;
+                input {
+                    font-size: 2rem;
+                }
+
+                button {
+                    font-size: 2rem;
+                }
+            }
         }
     }
+
 }

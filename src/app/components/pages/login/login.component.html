@@ -1,24 +1,27 @@
-<retro-post-it>
-    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+<retro-post-it id="login">
+    <div postItHeader class="header"></div>
+    <div class="login-content" postItContent>
         <h1>Login</h1>
-        <div class="form-group row">
-            <label class="form-label col-3" for="email">Email</label>
-            <input 
-                id="email"
-                class="form-control col-8" 
-                type="email"
-                formControlName="email"    
-            />
-        </div>
-        <div class="form-group row">
-            <label class="form-label col-3" for="password">Password</label>
-            <input 
-                id="password" 
-                class="form-control col-8" 
-                type="password"
-                formControlName="password"
-            />
-        </div>
-        <button class="btn btn-info btn-block login-btn">Login</button>
-    </form>
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input 
+                    id="email"
+                    class="form-control" 
+                    type="email"
+                    formControlName="email"    
+                />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input 
+                    id="password" 
+                    class="form-control" 
+                    type="password"
+                    formControlName="password"
+                />
+            </div>
+            <button class="btn btn-info btn-block login-btn">Login</button>
+        </form>
+    </div>
 </retro-post-it>

@@ -1,0 +1,43 @@
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+
+    #start-game-container {
+        padding: 3rem;
+        border-radius: 2rem;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            margin-bottom: 2rem;
+        }
+
+        button {
+            border-radius: 1rem;
+            padding: 1rem;
+            background-color: salmon;
+            color: white;
+            border: none;
+            box-shadow: 0.05rem 0.05rem 0.5rem black;
+
+            &:hover {
+                background-color: darken(salmon, 10%);
+                box-shadow: 0.01rem 0.01rem 0.2rem black;
+            }
+
+            &:active {
+                background-color: lighten(salmon, 5%);
+                box-shadow: none;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

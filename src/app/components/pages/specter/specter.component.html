@@ -1,1 +1,9 @@
-<div class="retro-canvas-container" #retroCanvasContainer></div>
+<div class="retro-canvas-container" #retroCanvasContainer>
+    <div id="ui-container" *ngIf="($player | async) as player">
+        <ng-container *ngIf="retroId">
+            <fa-icon *ngIf="!IsInRetro" class="retro-btn" [icon]="stickyNoteIcon" (click)="JoinRetro()"></fa-icon>
+            <retro-retro-board *ngIf="IsInRetro" [retroId]="retroId" [playerId]="player.id" (closeBoard)="ExitRetro()"></retro-retro-board>
+            <retro-cant-even *ngIf="ICantEven && !IsInRetro"></retro-cant-even>
+        </ng-container>
+    </div>
+</div>

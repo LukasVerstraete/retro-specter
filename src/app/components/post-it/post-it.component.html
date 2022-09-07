@@ -1,1 +1,10 @@
-<ng-content></ng-content>
+<!-- <ng-content></ng-content> -->
+<div class="post-it">
+    <div class="post-it-header">
+        <ng-content select="[postItHeader]"></ng-content>
+    </div>
+    <div class="post-it-content">
+        <ng-content select="[postItContent]"></ng-content>
+    </div>
+</div>
+

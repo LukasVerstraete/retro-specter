@@ -1,0 +1,267 @@
+:host {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 2.5rem;
+    overflow: hidden;
+
+    #retro-container {
+        padding: 5rem 3rem 3rem 3rem;
+        border-radius: 2rem;
+        background-color: white;
+        width: 90%;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            cursor: pointer;
+
+            &:hover {
+                color: darkgray;
+            }
+        }
+
+        .column-container {
+            flex-grow: 1;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                width: 10px;
+                height: 10px
+            }
+              
+            &::-webkit-scrollbar-track {
+                background: #cfcfcf38; 
+            }
+            
+            &::-webkit-scrollbar-thumb {
+                background: #dddddd; 
+            }
+            
+            &::-webkit-scrollbar-thumb:hover {
+                background: darken(#dddddd, 10%); 
+            }
+
+            .retro-column {
+                min-width: 57rem;
+                border-right: 1px solid lightgray;
+                // flex: 0 1 auto;
+    
+                &:last-child {
+                    border-right: none;
+                }
+    
+                .column-title {
+                    display: block;
+                    text-align: center;
+                }
+            }
+        }
+
+        .post-it-container {
+            background-color: #f5f5f5;
+            margin-top: 1rem;
+            padding: 1.5rem;   
+
+            .add-note-post-it {
+                min-width: 13rem;
+                max-width: 13rem;
+                width: 13rem;
+                height: 17rem;
+
+                .post-it-text-area {
+                    background-color: transparent;
+                    border: none;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 1.7rem;
+                    font-weight: 500;
+                    resize: none;
+                    line-height: 1.6rem;
+
+                    &:focus {
+                        outline: 2px solid darken( #fdfd86, 10%);
+                    }
+
+                    &:hover {
+                        background-color: lighten( #fdfd86, 10%);
+                    }
+
+                    &::-webkit-scrollbar {
+                        width: 10px;
+                    }
+                      
+                    &::-webkit-scrollbar-track {
+                        background: transparent; 
+                    }
+                    
+                    &::-webkit-scrollbar-thumb {
+                        background: darken(#fdfd86, 30%); 
+                    }
+                    
+                    &::-webkit-scrollbar-thumb:hover {
+                        background: darken(#fdfd86, 40%); 
+                    }
+                }
+
+                .emoji-container {
+                    position: relative;
+
+                    .emoji-btn {
+                        padding: 0;
+                        color: lightgray;
+                        background-color: transparent;
+                        border: none;
+                        outline: none;
+                        font-size: 1.8rem;
+    
+                        &:hover {
+                            color: grey;
+                        }
+    
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+    
+                    .emoji-picker {
+                        position: absolute;
+                        bottom: 30px;
+                        left: 100px;
+                        z-index: 9999;
+                    }
+                }
+            }
+
+            .player-notes {
+                overflow-y: auto;
+
+                &::-webkit-scrollbar {
+                    width: 10px;
+                    height: 10px
+                }
+                
+                &::-webkit-scrollbar-track {
+                    background: #cfcfcf38; 
+                }
+                
+                &::-webkit-scrollbar-thumb {
+                    background: #dddddd; 
+                }
+                
+                &::-webkit-scrollbar-thumb:hover {
+                    background: darken(#dddddd, 10%); 
+                }
+
+                .player-note {
+                    overflow-y: initial;
+                }
+            }
+        }
+    }
+
+    #action-points {
+        position: fixed;
+        top: 0;
+        right: -55rem;
+        height: 100vh;
+        width: 60rem;
+        background-color: #1D1B26;
+        color: #D8EDF2;
+        box-shadow: 0 0 2rem #535353af;
+        display: flex;
+        transition: right 0.5s ease;
+        
+        &.active {
+            right: 0;
+
+            > span > .ng-fa-icon {
+                transform: rotate(-180deg);
+            }
+        }
+
+        > span > .ng-fa-icon {
+            margin: 2rem;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+        
+        > div {
+            padding: 5rem 5rem 5rem 0;
+            font-size: 2rem;
+    
+            input {
+                background-color: #23212e;
+                border: none;
+                color: #D8EDF2;
+                font-size: 2rem;
+            }
+    
+            .add-action-point-input {
+                flex-grow: 1;
+                margin-right: 2rem;
+            }
+            
+            button {
+                background-color: #D8EDF2;
+                color: #1D1B26;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: none;
+                font-size: 2rem;
+                width: 3rem;
+                height: 3rem;
+    
+                &:hover {
+                    background-color: #1D1B26;
+                    color: #D8EDF2;
+                }
+            }
+
+            ul {
+                li {
+                    .remove-button {
+                        transform: scale(1);
+                        cursor: pointer;
+
+                        &:hover {
+                            transform: scale(1.4);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.player-note {
+    min-width: 13rem;
+    max-width: 13rem;
+    width: 13rem;
+    height: 15rem;
+    margin: 0.5rem;
+    line-height: 1.6rem;
+    font-size: 1.7rem;
+
+    .drag-handle {
+        color: lightgray;
+        cursor: pointer;
+        font-size: 1.8rem;
+
+        &:hover {
+            color: gray;
+        }
+    }
+}

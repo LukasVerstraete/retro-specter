@@ -1,0 +1,14 @@
+<div id="retro-list" *ngIf="($retros | async) as retros">
+  <h1>Retros</h1>
+  <div *ngFor="let retro of retros; let i = index">
+    <div class="retro">
+        <b (click)="ToggleMarkdown(retro.id)">{{retro.name}}</b>
+        <button class="play-button" [routerLink]="['/retro', retro.id]">
+            <fa-icon [icon]="playIcon"></fa-icon>
+        </button>
+    </div>
+    <div class="markdown" *ngIf="IsMarkdownOpen(retro.id)">
+        <textarea readonly rows="30" [ngModel]="GetRetroMarkdown(retro)"></textarea>
+    </div>
+  </div>
+</div>
